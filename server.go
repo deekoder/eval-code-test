@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/getsentry/sentry-go"
@@ -26,12 +27,13 @@ func main() {
 	http.ListenAndServe(":8080", nil)
 }
 
+// HelloServer : A simple dummy handler
 func HelloServer(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello, %s!", r.URL.Path[1:])
-	//sentry.CaptureMessage("opening file...")
-	/*file, err := os.Open("/tmp/nonexistant-file")
+	sentry.CaptureMessage("opening file...")
+	file, err := os.Open("/tmp/nonexistant-file")
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("%s", file)*/
+	fmt.Printf("%s", file)
 }
